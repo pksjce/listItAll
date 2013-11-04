@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<script type="text/javascript" src='linkedList.js'></script>
+		Example for circular linked list
+	</head>
+	<body>
+		<div id='showList'>
+		</div>
+		<div id ='add' style='cursor:pointer;font-size:20pt'>
+			Add
+		</div>
+		<div id='insertAfter2' style='cursor:pointer;font-size:20pt'>
+			InsertAfter 2nd Node
+		</div>
+		<script type="text/javascript">
+			var addButton = document.getElementById('add');
+			var showList = document.getElementById('showList');
+			linkedList = null;
+			addButton.onclick = function(){
+				if(linkedList == null){
+					linkedList = new LinkedList.Circular();
+				}
+				var item = new LinkedList.Node(getRandomArbitary(1,100));
+				linkedList.append(item);
+				traverse();
+			}
+			function getRandomArbitary (min, max) {
+			    return Math.random() * (max - min) + min;
+			}
+			function traverse(){
+				var html = "";
+				var node = linkedList.first;
+				for(var i =0;i <linkedList.length; i++){
+					html = html + "|" + node.data + "|";
+					node = node.next;
+				}
+				showList.innerHTML = html;
+			}
+			var insertAfter2 = document.getElementById('insertAfter2');
+			insertAfter2.onclick = function(){
+				if(linkedList == null || linkedList.length < 2){
+					alert("This is impossible i say!");
+				} else {
+					var item = new LinkedList.Node(getRandomArbitary(1,100));
+					var secItem = linkedList.first.next;
+					linkedList.insertAfter(secItem, item);
+				}
+				traverse();
+			}
+		</script>
+	</body>
+</html>
